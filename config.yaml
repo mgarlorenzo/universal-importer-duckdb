@@ -1,0 +1,83 @@
+transformations_config:
+  employees:
+    source: "./input_data/employees.csv"  # Name of the source CSV file
+
+    settings:
+      duplicate_resolution: "last"  # Options: "first", "last", "exclude_all"
+      custom_validation_mode: "skip"  # Options: "stop", "skip"
+      unique_composite:
+        - ["employee_id", "company_id"]  # Deduplicate based on these columns
+
+    projections:
+      - name: personal_data
+        type: "table"
+        query: |
+          SELECT employee_id, company_id, first_name, last_name, email, birthday_on, country FROM employees
+      - name: contract_data
+        type: "table"
+        query: |
+          SELECT employee_id, starts_on, ends_on, salary_amount FROM employees
+        aliases:
+          employee_id: emp_id
+
+    validations:
+      schema:
+        fields:
+          company_id: {"type": "int", "required": true}
+          employee_id: {"type": "int", "required": true}
+          first_name: {"type": "str", "required": true}
+          last_name: {"type": "str", "required": true}
+          email: {"type": "str", "required": true, "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"}
+          gender: {"type": "str", "required": true, "pattern": "^(male|female)$"}
+          birthday_on: {"type": "str", "required": true, "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+          country: {"type": "str", "required": true}
+          effective_on: {"type": "str", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+          starts_on: {"type": "str", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+          ends_on: {"type": "str", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+          has_payroll: {"type": "bool"}
+          has_trial_period: {"type": "bool"}
+          trial_period_ends_on: {"type": "str", "required": false, "default": "", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+          salary_amount: {"type": "float"}
+          salary_frequency: {"type": "str", "pattern": "^(yearly|monthly|weekly|daily|hourly)$"}
+          working_week_days: {"type": "str"}
+          working_hours: {"type": "int"}
+          working_hours_frequency: {"type": "str", "pattern": "^(week|month|year)$"}
+          max_legal_yearly_hours: {"type": "int"}
+          maximum_weekly_hours: {"type": "int"}
+          created_at: {"type": "str", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+          updated_at: {"type": "str", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+          contracts_es_tariff_group_id: {"type": "int"}
+      custom:
+        rules:
+          - field: birthday_on
+            validation: "age_gte"
+            params:
+              min_age: 35
+
+  locations:
+    source: "./input_data/locations.csv"  # Name of the source CSV file
+
+    projections:
+      - name: location_data
+        type: "view"
+        query: |
+          SELECT id, company_id, name, timezone, country, state, city, postal_code, main, latitude, longitude FROM locations
+
+    validations:
+      schema:
+        fields:
+          id: {"type": "int", "required": true}
+          company_id: {"type": "int", "required": true}
+          name: {"type": "str", "required": true}
+          timezone: {"type": "str", "required": true, "pattern": "^[a-zA-Z/_-]+$"}
+          country: {"type": "str", "required": true, "pattern": "^[a-zA-Z]{2}$"}
+          state: {"type": "str", "required": true}
+          city: {"type": "str", "required": true}
+          address_line_1: {"type": "str", "required": true}
+          address_line_2: {"type": "str", "required": false, "default": ""}
+          postal_code: {"type": "str", "required": true, "pattern": "^[0-9]{3,6}(-[0-9]{3,4})?$"}
+          main: {"type": "bool", "required": true}
+          latitude: {"type": "float", "required": true}
+          longitude: {"type": "float", "required": true}
+          radius: {"type": "int", "required": true}
+          siret: {"type": "str", "required": false, "default": ""}

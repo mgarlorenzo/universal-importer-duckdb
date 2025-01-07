@@ -1,0 +1,35 @@
+# Exclude the DuckDB database files and exported views
+duckdb/
+exported_views/
+employee_data.duckdb/
+
+# Python-related files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment and IDE configurations
+.env
+*.env
+.idea/
+.vscode/
+*.swp
+
+# Test outputs
+tests/test_data/
+tests/__pycache__/
+output/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Other backup files
+*.orig
+

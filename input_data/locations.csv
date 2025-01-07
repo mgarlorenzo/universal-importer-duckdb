@@ -1,0 +1,11 @@
+id,company_id,name,timezone,country,state,city,address_line_1,address_line_2,postal_code,phone_number,main,latitude,longitude,radius,siret
+1,1,Barcelona Office,Europe/Madrid,es,Barcelona,Barcelona,Carrer Mallorca,61 2A,08005,"657483987",false,52.378,4.898,5,FR00123456789
+2,1,Madrid Office,Europe/Madrid,es,Madrid,Madrid,Gran Via,45A,28013,"912345678",true,40.4168,-3.7038,10,FR00123456780
+3,2,Paris Office,Europe/Paris,fr,Ile-de-France,Paris,Champs Elysees,Suite 501,75008,"3312345678",false,48.8566,2.3522,8,FR987654321
+4,2,London Office,Europe/London,gb,Greater London,London,Oxford Street,Building 12,W1D1NN,"441234567890",true,51.5074,-0.1278,6,GB0011223344
+5,3,New York Office,America/New_York,us,New York,New York,5th Avenue,Floor 10,10001,"12123456789",false,40.7128,-74.006,15,US999888777
+6,3,San Francisco Office,America/Los_Angeles,us,California,San Francisco,Market Street,Floor 20,94103,"14151234567",true,37.7749,-122.4194,20,US888777666
+7,4,Berlin Office,Europe/Berlin,de,Berlin,Berlin,Alexanderplatz,Tower 2,10178,"493012345678",false,52.5200,13.4050,12,DE123456789
+8,4,Amsterdam Office,Europe/Amsterdam,nl,North Holland,Amsterdam,Damrak,Office 23,1012LP,"31234567890",true,52.3676,4.9041,10,NL987654321
+9,5,Sydney Office,Australia/Sydney,au,New South Wales,Sydney,George Street,Unit 101,2000,"61234567890",false,-33.8688,151.2093,18,AU123456789
+10,5,Tokyo Office,Asia/Tokyo,jp,Tokyo,Tokyo,Shibuya Crossing,Level 3,150-0002,"813123456789",true,35.6895,139.6917,25,JP123456789
